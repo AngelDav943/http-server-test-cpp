@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<p>helo world</p>
+	<button id="count">counter: 0</button>
+	<script>
+		const button = document.getElementById("count");
+		async function updateCount() {
+			const countResponse = await fetch("/get_count")
+			button.innerText = `${await countResponse.text()}`
+		}
+
+		button.addEventListener("click", async e => {
+			e.preventDefault()
+			const countResponse = await fetch("/count")
+			button.innerText = `counter: ${await countResponse.text()}`
+		})
+
+		updateCount()
+	</script>
+</body>
+</html>
